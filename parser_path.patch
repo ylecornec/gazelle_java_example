@@ -1,0 +1,21 @@
+diff --git a/java/gazelle/private/servermanager/servermanager.go b/java/gazelle/private/servermanager/servermanager.go
+index f8924d1..de44a5e 100644
+--- a/java/gazelle/private/servermanager/servermanager.go
++++ b/java/gazelle/private/servermanager/servermanager.go
+@@ -12,7 +12,6 @@ import (
+ 	"sync"
+ 	"time"
+ 
+-	"github.com/bazel-contrib/rules_jvm/java/gazelle/private/bazel"
+ 	pb "github.com/bazel-contrib/rules_jvm/java/gazelle/private/javaparser/proto/gazelle/java/javaparser/v0"
+ 	"google.golang.org/grpc"
+ )
+@@ -42,7 +41,7 @@ func (m *ServerManager) Connect() (*grpc.ClientConn, error) {
+ 
+ 	logLevelFlag := fmt.Sprintf("-Dorg.slf4j.simpleLogger.defaultLogLevel=%s", m.javaLogLevel)
+ 
+-	javaParserPath, found := bazel.FindBinary("java/src/com/github/bazel_contrib/contrib_rules_jvm/javaparser/generators", "Main")
++	javaParserPath, found := "external/contrib_rules_jvm/java/src/com/github/bazel_contrib/contrib_rules_jvm/javaparser/generators/Main", true
+ 	if !found {
+ 		return nil, fmt.Errorf("failed to find javaparser in runfiles")
+ 	}
